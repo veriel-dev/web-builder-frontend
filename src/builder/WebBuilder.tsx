@@ -1,5 +1,5 @@
 
-import { ElementConstructor, ElementEditor, MainLayout, RenderElement } from "../components"
+import { Container, ElementConstructor, ElementEditor, GridContainer, MainLayout, RenderElement } from "../components"
 import { Settings, Trash2 } from "lucide-react"
 import { useDragAndDrop, useWebBuilderStore } from "../store/store"
 
@@ -44,7 +44,16 @@ export const WebBuilder = () => {
                   <Trash2 className="w-4 h-4 text-red-600" />
                 </button>
               </div>
-              {RenderElement(element)}
+              {
+                element.type == "container" && (<Container element={element} /> )
+              }
+              {
+                element.type == "grid-container" && (<GridContainer element={element} /> )
+              }
+              {
+                element.type != "container" && element.type != "grid-container" && (<RenderElement element={element} />)
+              }
+              
               {editingElement?.id === element.id && <ElementEditor element={element} updateElement={updateElement} />}
             </div>
           ))}

@@ -1,12 +1,13 @@
 import { LucideIcon } from "lucide-react";
+import { ReactNode } from "react";
 // Propiedades base comunes para todos los elementos
 type CommonProps = {
   id?: number;
-  label: string;
-  fontSize: string;
-  color: string;
-  backgroundColor: string;
-  icon: LucideIcon;
+  label?: string;
+  fontSize?: string;
+  color?: string;
+  backgroundColor?: string;
+  icon?: LucideIcon;
 };
 
 type TextProps = {
@@ -26,13 +27,12 @@ type ContainerSpecificProps = {
 };
 
 
+
 type GridContainerSpecificProps = {
-  direction: string;
-  cols: 'grid-cols-2';
-  align: string;
-  gap: string;
-  padding: string;
-};
+  cols: string,
+  gap: string,
+  padding: string,
+}
 
 // Elements 
 
@@ -54,10 +54,12 @@ export type HeroElement = CommonProps & HeroSpecificProps & {
 
 export type ContainerElement = CommonProps & ContainerSpecificProps & {
   type: "container";
+  children?: ElementBuilder[];
 };
 
 export type ContainerGridElement = CommonProps & GridContainerSpecificProps & {
   type: "grid-container";
+  children?: ElementBuilder[];
 };
 
 
@@ -71,6 +73,10 @@ export type ParagraphProps = BaseElementProps & TextProps;
 export type ButtonProps = BaseElementProps & TextProps;
 
 export type HeroProps = BaseElementProps & HeroSpecificProps;
+
+export type ContainerProps = BaseElementProps & ContainerSpecificProps;
+
+export type ContainerGridProps = BaseElementProps & GridContainerSpecificProps;
 
 
 // Tipo unión para todos los elementos
@@ -91,3 +97,18 @@ export type UpdatesByType = {
   container: Partial<Omit<ContainerElement, "id" | "type">>;
   "grid-container": Partial<Omit<ContainerGridElement, "id" | "type">>;
 };
+
+
+type SectionItem = {
+  icon: ReactNode;
+  label: string;
+  preview: ReactNode;
+  element: ElementBuilder;
+};
+export type Section = {
+  id: 'containers' | 'elements';
+  title: string;
+  items: SectionItem[];
+};
+
+export type Sections = Section[];

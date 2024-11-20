@@ -1,6 +1,8 @@
 import { Clipboard, Grid3X3, Heading, HeartIcon, Table2, Text } from "lucide-react";
 
 
+
+
 const containerElemenst = [
   {
     type: 'grid-container',
@@ -99,7 +101,7 @@ const templates = {
   ],
 };
 
-
+export const containerClasses = "relative min-h-[100px] w-full rounded-lg border-2 transition-colors duration-200 border-dashed border-gray-200"
 export {
   singleElements,
   containerElemenst,
