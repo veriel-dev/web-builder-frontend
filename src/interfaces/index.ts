@@ -1,5 +1,6 @@
 import { LucideIcon } from "lucide-react";
 import { ReactNode } from "react";
+import { deviceWidths } from "../const";
 // Propiedades base comunes para todos los elementos
 type CommonProps = {
   id?: number;
@@ -33,9 +34,6 @@ type GridContainerSpecificProps = {
   gap: string,
   padding: string,
 }
-
-// Elements 
-
 export type HeadingElement = CommonProps & TextProps & {
   type: "heading";
 };
@@ -112,3 +110,5 @@ export type Section = {
 };
 
 export type Sections = Section[];
+
+export type DeviceType = keyof typeof deviceWidths;

@@ -146,7 +146,7 @@ export const ElementConstructor = ({ handleDragStart }: Props) => {
     const toggleSection = (sectionId: SectionId) => setActiveSection(sectionId);
     
     return (
-        <div className="w-72 p-4 bg-gray-100 rounded-xl shadow-sm">
+        <div className="w-72 border-r bg-white p-4">
             <div className="flex items-center space-x-2 mb-6">
                 <Palette className="h-5 w-5 text-indigo-500" />
                 <h2 className="text-lg font-semibold text-gray-700">Constructor</h2>

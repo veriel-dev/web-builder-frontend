@@ -101,6 +101,14 @@ const templates = {
   ],
 };
 
+export const deviceWidths = {
+  desktop: 'w-full',
+  tablet: 'w-[768px]',
+  mobile: 'w-[375px]'
+} as const;
+
+
+
 export const containerClasses = "relative min-h-[100px] w-full rounded-lg border-2 transition-colors duration-200 border-dashed border-gray-200"
 export {
   singleElements,
