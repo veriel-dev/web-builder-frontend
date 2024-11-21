@@ -1,13 +1,19 @@
-import { Undo, Redo, Monitor, Tablet, Smartphone, Code, Eye, Share2, Save } from 'lucide-react'
 import React from 'react'
-import { DeviceType } from '../../../interfaces'
+
+import { Undo, Redo, Monitor, Tablet, Smartphone, Code, Eye, Share2, Save } from 'lucide-react'
+
+import type { DeviceType } from '../../../interfaces'
 
 interface Props {
     selectedDevice: string
     setSelectedDevice: (device: DeviceType) => void
     setIsPreviewMode: React.Dispatch<React.SetStateAction<boolean>>
 }
-export const TopBar = ({selectedDevice, setSelectedDevice, setIsPreviewMode}:Props) => {
+export const TopBar = ({
+    selectedDevice,
+    setSelectedDevice,
+    setIsPreviewMode
+}: Props): JSX.Element => {
     return (
         <div className="h-16 border-b bg-white px-4 flex items-center justify-between">
             <div className="flex items-center gap-4">
@@ -44,8 +50,8 @@ export const TopBar = ({selectedDevice, setSelectedDevice, setIsPreviewMode}:Pro
                 <button className="p-2 hover:bg-slate-100 rounded-lg">
                     <Code className="w-5 h-5" />
                 </button>
-                <button 
-                    className="p-2 hover:bg-slate-100 rounded-lg" 
+                <button
+                    className="p-2 hover:bg-slate-100 rounded-lg"
                     onClick={() => setIsPreviewMode(true)}
                 >
                     <Eye className="w-5 h-5" />

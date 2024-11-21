@@ -1,6 +1,8 @@
-import { LucideIcon } from "lucide-react";
-import { ReactNode } from "react";
-import { deviceWidths } from "../const";
+import type { ReactNode } from "react";
+
+import type { deviceWidths } from "../const";
+import type { LucideIcon } from "lucide-react";
+
 // Propiedades base comunes para todos los elementos
 type CommonProps = {
   id?: number;
@@ -9,7 +11,7 @@ type CommonProps = {
   color?: string;
   backgroundColor?: string;
   icon?: LucideIcon;
-  children?: ElementBuilder[]; 
+  children?: ElementBuilder[];
 };
 
 type TextProps = {
@@ -28,39 +30,42 @@ type ContainerSpecificProps = {
   padding: string;
 };
 
-
-
 type GridContainerSpecificProps = {
-  cols: string,
-  gap: string,
-  padding: string,
-}
-export type HeadingElement = CommonProps & TextProps & {
-  type: "heading";
+  cols: string;
+  gap: string;
+  padding: string;
 };
+export type HeadingElement = CommonProps &
+  TextProps & {
+    type: "heading";
+  };
 
-export type ParagraphElement = CommonProps & TextProps & {
-  type: "paragraph";
-};
+export type ParagraphElement = CommonProps &
+  TextProps & {
+    type: "paragraph";
+  };
 
-export type ButtonElement = CommonProps & TextProps & {
-  type: "button";
-};
+export type ButtonElement = CommonProps &
+  TextProps & {
+    type: "button";
+  };
 
-export type HeroElement = CommonProps & HeroSpecificProps & {
-  type: "hero";
-};
+export type HeroElement = CommonProps &
+  HeroSpecificProps & {
+    type: "hero";
+  };
 
-export type ContainerElement = CommonProps & ContainerSpecificProps & {
-  type: "container";
-  children?: ElementBuilder[];
-};
+export type ContainerElement = CommonProps &
+  ContainerSpecificProps & {
+    type: "container";
+    children?: ElementBuilder[];
+  };
 
-export type ContainerGridElement = CommonProps & GridContainerSpecificProps & {
-  type: "grid-container";
-  children?: ElementBuilder[];
-};
-
+export type ContainerGridElement = CommonProps &
+  GridContainerSpecificProps & {
+    type: "grid-container";
+    children?: ElementBuilder[];
+  };
 
 // Props específicos para cada componente
 export type BaseElementProps = Omit<CommonProps, "id" | "label" | "icon">;
@@ -77,16 +82,15 @@ export type ContainerProps = BaseElementProps & ContainerSpecificProps;
 
 export type ContainerGridProps = BaseElementProps & GridContainerSpecificProps;
 
-
 // Tipo unión para todos los elementos
 export type ElementBuilder =
   | HeadingElement
   | ParagraphElement
   | ButtonElement
-  | HeroElement 
+  | HeroElement
   | ContainerElement
   | ContainerGridElement;
-  
+
 // Tipos para actualizaciones
 export type UpdatesByType = {
   heading: Partial<Omit<HeadingElement, "id" | "type">>;
@@ -97,7 +101,6 @@ export type UpdatesByType = {
   "grid-container": Partial<Omit<ContainerGridElement, "id" | "type">>;
 };
 
-
 type SectionItem = {
   icon: ReactNode;
   label: string;
@@ -105,7 +108,7 @@ type SectionItem = {
   element: ElementBuilder;
 };
 export type Section = {
-  id: 'containers' | 'elements';
+  id: "containers" | "elements";
   title: string;
   items: SectionItem[];
 };

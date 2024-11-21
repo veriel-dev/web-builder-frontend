@@ -1,5 +1,7 @@
-import { ElementBuilder, HeadingProps, ParagraphProps, ButtonProps, HeroProps, } from "../interfaces";
 import { Paragraph, Button, Hero, Heading } from "./ui";
+
+import type { ElementBuilder, HeadingProps, ParagraphProps, ButtonProps, HeroProps, } from "../interfaces";
+
 
 
 export type ElementTypeToProps = {
@@ -23,15 +25,12 @@ interface RenderElementProps {
     element: ElementBuilder;
 }
 
-export const RenderElement = ({ element }: RenderElementProps) => {
-    // Asegurarse de que el tipo es una key válida de ELEMENT_COMPONENTS
+export const RenderElement = ({ element }: RenderElementProps): JSX.Element | null => {
     const Component = ELEMENT_COMPONENTS[element.type as ElementType];
 
-    if (!Component) return null;
+    if (!Component) { return null; }
 
-    // Extraer las props que no queremos pasar al componente
-    const { id, type, label, icon, ...elementProps } = element;
-
-    // @ts-expect-error: Las props son tipadas correctamente en tiempo de ejecución
+    const { id: _id, type: _type, label: _label, icon: _icon, ...elementProps } = element;
+    //@ts-expect-error
     return <Component {...elementProps} />;
 };

@@ -1,5 +1,5 @@
-import { ElementBuilder, UpdatesByType } from "../interfaces";
-import { SetState } from "./store";
+import type { ElementBuilder, UpdatesByType } from "../interfaces";
+import type { SetState } from "./store";
 
 
 
@@ -51,7 +51,7 @@ export const createElementsSlice = (setState: SetState) => ({
                     ) {
                         const filteredChildren = filterElementsRecursively(element.children);
                         
-                        if (element.id === id) return false;
+                        if (element.id === id) {return false;}
                         
                         return {
                             ...element,

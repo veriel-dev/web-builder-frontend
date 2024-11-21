@@ -1,8 +1,12 @@
 
-import { ElementBuilder,  Sections } from "../../interfaces"
-import { Grid2X2, Heading1, Heart, Layout, Palette, Square, Type } from "lucide-react"
 import { useState } from "react"
+
+import { Grid2X2, Heading1, Heart, Layout, Palette, Square, Type } from "lucide-react"
+
 import { CategorySection } from "./categorySection/CategorySection"
+
+import type { ElementBuilder, Sections } from "../../interfaces"
+
 
 interface Props {
     handleDragStart: (element: ElementBuilder) => void
@@ -139,14 +143,14 @@ const sections: Sections = [
 ]
 
 
-export const ElementConstructor = ({ handleDragStart }: Props) => {
+export const ElementConstructor = ({ handleDragStart }: Props): JSX.Element => {
 
     type SectionId = 'containers' | 'elements';
 
     const [activeSection, setActiveSection] = useState<SectionId>('containers');
 
-    const toggleSection = (sectionId: SectionId) => setActiveSection(sectionId);
-    
+    const toggleSection = (sectionId: SectionId): void => setActiveSection(sectionId);
+
     return (
         <div className="w-72 border-r bg-white p-4">
             <div className="flex items-center space-x-2 mb-6">
@@ -158,10 +162,10 @@ export const ElementConstructor = ({ handleDragStart }: Props) => {
                 {sections.map((section) => (
                     <CategorySection
                         key={section.id}
-                        section={section}
-                        isOpen={activeSection === section.id}
-                        onToggle={() => toggleSection(section.id)}
                         handleDragStart={handleDragStart}
+                        isOpen={activeSection === section.id}
+                        section={section}
+                        onToggle={() => toggleSection(section.id)}
                     />
                 ))}
             </div>

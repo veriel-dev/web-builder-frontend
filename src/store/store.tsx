@@ -1,11 +1,18 @@
 import { create } from "zustand";
-import { ElementsState, ElementsActions, createElementsSlice } from "./elements-state";
-import { DragDropState, DragDropActions, createDragDropSlice } from "./drop-state";
-import { createEditorSlice, EditorActions, EditorState } from "./editor-state";
+
+import { createDragDropSlice } from "./drop-state";
+import { createEditorSlice } from "./editor-state";
+import { createElementsSlice } from "./elements-state";
+
+import type { DragDropState, DragDropActions } from "./drop-state";
+import type { EditorActions, EditorState } from "./editor-state";
+import type { ElementsState, ElementsActions } from "./elements-state";
 
 export type SetState = {
     (
-        partial: WebBuilderStore | Partial<WebBuilderStore> | ((state: WebBuilderStore) => WebBuilderStore | Partial<WebBuilderStore>),
+        partial:
+            WebBuilderStore | Partial<WebBuilderStore>
+            | ((state: WebBuilderStore) => WebBuilderStore | Partial<WebBuilderStore>),
         replace?: false
     ): void;
     (state: WebBuilderStore | ((state: WebBuilderStore) => WebBuilderStore), replace: true): void;

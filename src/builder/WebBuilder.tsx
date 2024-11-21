@@ -1,19 +1,18 @@
-
-import {  CanvasArea, ElementConstructor,  MainLayout,  TopBar } from "../components"
-import {  useWebBuilderStore} from "../store/store"
-
+import { CanvasArea, ElementConstructor, MainLayout, TopBar } from "../components"
 import { PreviewMode } from "../components/builder/previewMode/PreviewMode";
+import { useWebBuilderStore } from "../store/store"
+
 
 
 
 export const WebBuilder = () => {
-  const { 
+  const {
     // Existing state
     selectedDevice,
     setSelectedDevice,
     isPreviewMode,
     setIsPreviewMode,
-    
+
     // New drag and drop functionality
     handleDragStart,
     handleDrop,
@@ -23,11 +22,11 @@ export const WebBuilder = () => {
 
   if (isPreviewMode) {
     return (
-      <PreviewMode  
-        selectedDevice={selectedDevice} 
-        setSelectedDevice={setSelectedDevice} 
-        setIsPreviewMode={setIsPreviewMode}
+      <PreviewMode
         isPreviewMode={isPreviewMode}
+        selectedDevice={selectedDevice}
+        setIsPreviewMode={setIsPreviewMode}
+        setSelectedDevice={setSelectedDevice}
       />
     )
   }
@@ -35,26 +34,27 @@ export const WebBuilder = () => {
   return (
     <MainLayout>
       {/* Left SideBar */}
-      <ElementConstructor 
-        handleDragStart={handleDragStart} 
+      <ElementConstructor
+        handleDragStart={handleDragStart}
       />
       {/* Main Content */}
-      <div 
+      <div
         className="flex-1 flex flex-col"
-        onDrop={(e) => handleDrop(e)}
-        onDragOver={(e) => handleDragOver(e)}
+        role="contentinfo"
         onDragLeave={handleDragLeave}
+        onDragOver={(e) => handleDragOver(e)}
+        onDrop={(e) => handleDrop(e)}
       >
         {/* Top Toolbar */}
-        <TopBar 
-          selectedDevice={selectedDevice} 
-          setSelectedDevice={setSelectedDevice}
+        <TopBar
+          selectedDevice={selectedDevice}
           setIsPreviewMode={setIsPreviewMode}
+          setSelectedDevice={setSelectedDevice}
         />
         {/* Canvas */}
-        <CanvasArea 
-          selectedDevice={selectedDevice} 
+        <CanvasArea
           isPreviewMode={isPreviewMode}
+          selectedDevice={selectedDevice}
         />
       </div>
     </MainLayout>

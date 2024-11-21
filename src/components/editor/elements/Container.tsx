@@ -1,21 +1,22 @@
 
-import { ContainerElement, ElementBuilder, UpdatesByType } from '../../../interfaces'
+import type { ContainerElement, ElementBuilder, UpdatesByType } from '../../../interfaces'
+
 interface Props {
     element: Extract<ElementBuilder, ContainerElement>;
     updateElement: (id: number, updates: UpdatesByType[keyof UpdatesByType]) => void;
 }
-export const Container = ({ element, updateElement }: Props) => {
+export const Container = ({ element, updateElement }: Props): JSX.Element => {
     return (
-        <>
-            <div>
+        <div>
             <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                     Dirección
                 </label>
                 <select
-                    value={element.direction}
-                    onChange={(e) => updateElement(element.id!, { direction: e.target.value })}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                    value={element.direction}
+                    onChange={(e) => updateElement(
+                        element.id as number, { direction: e.target.value })}
                 >
                     <option value="row">Horizontal</option>
                     <option value="column">Vertical</option>
@@ -27,9 +28,9 @@ export const Container = ({ element, updateElement }: Props) => {
                     Alineación
                 </label>
                 <select
-                    value={element.align}
-                    onChange={(e) => updateElement(element.id!, { align: e.target.value })}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                    value={element.align}
+                    onChange={(e) => updateElement(element.id as number, { align: e.target.value })}
                 >
                     <option value="start">Inicio</option>
                     <option value="center">Centro</option>
@@ -42,9 +43,10 @@ export const Container = ({ element, updateElement }: Props) => {
                     Justificación
                 </label>
                 <select
-                    value={element.justify}
-                    onChange={(e) => updateElement(element.id!, { justify: e.target.value })}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                    value={element.justify}
+                    onChange={(e) => updateElement(
+                        element.id as number, { justify: e.target.value })}
                 >
                     <option value="start">Inicio</option>
                     <option value="center">Centro</option>
@@ -58,9 +60,9 @@ export const Container = ({ element, updateElement }: Props) => {
                     Espacio entre elementos
                 </label>
                 <select
-                    value={element.gap}
-                    onChange={(e) => updateElement(element.id!, { gap: e.target.value })}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                    value={element.gap}
+                    onChange={(e) => updateElement(element.id as number, { gap: e.target.value })}
                 >
                     <option value="gap-0">Sin espacio</option>
                     <option value="gap-2">Pequeño</option>
@@ -74,9 +76,10 @@ export const Container = ({ element, updateElement }: Props) => {
                     Padding
                 </label>
                 <select
-                    value={element.padding}
-                    onChange={(e) => updateElement(element.id!, { padding: e.target.value })}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                    value={element.padding}
+                    onChange={(e) => updateElement(
+                        element.id as number, { padding: e.target.value })}
                 >
                     <option value="p-0">Sin padding</option>
                     <option value="p-2">Pequeño</option>
@@ -85,6 +88,5 @@ export const Container = ({ element, updateElement }: Props) => {
                 </select>
             </div>
         </div>
-        </>
     )
 }

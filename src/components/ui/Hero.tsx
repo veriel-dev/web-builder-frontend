@@ -1,7 +1,14 @@
-import { HeroProps } from "../../interfaces";
 import { cn } from "../../lib/utils";
 
-export const Hero = ({ text, subtitle, fontSize, color, backgroundColor }: HeroProps) => {
+import type { HeroProps } from "../../interfaces";
+
+export const Hero = ({
+    text,
+    subtitle,
+    fontSize,
+    color,
+    backgroundColor
+}: HeroProps): JSX.Element => {
     return (
         <div className={cn(`${fontSize} ${color} ${backgroundColor}`, `p-12 rounded-xl text-center`)}>
             <h1 className="font-bold mb-4">{text}</h1>

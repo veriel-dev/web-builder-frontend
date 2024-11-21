@@ -1,6 +1,8 @@
-import { motion } from 'framer-motion'
 import React from 'react'
-import { ElementBuilder } from '../../../interfaces'
+
+import { motion } from 'framer-motion'
+
+import type { ElementBuilder } from '../../../interfaces'
 
 interface Props {
     icon: React.ReactNode
@@ -9,15 +11,21 @@ interface Props {
     element: ElementBuilder
     handleDragStart: (element: ElementBuilder) => void
 }
-export const ElementCard = ({ icon, label, preview, element, handleDragStart }: Props) => {
+export const ElementCard = ({
+    icon,
+    label,
+    preview,
+    element,
+    handleDragStart
+}: Props): JSX.Element => {
     return (
         <motion.div
-            initial={{ opacity: 0, y: -10 }}
+            draggable
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
+            initial={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
             onDragStart={() => handleDragStart(element as ElementBuilder)}
-            draggable
         >
             <button
                 className="w-full p-3 h-auto bg-white border border-gray-200 rounded-lg hover:bg-gray-50 hover:shadow-md transition-all duration-300 ease-in-out group"
@@ -32,8 +40,8 @@ export const ElementCard = ({ icon, label, preview, element, handleDragStart }: 
                         </span>
                         <motion.div
                             className="w-full min-h-[40px] flex items-center justify-center p-2 bg-white rounded border border-gray-100 group-hover:border-gray-200 transition-all duration-300"
-                            whileHover={{ scale: 1.02 }}
                             transition={{ duration: 0.2 }}
+                            whileHover={{ scale: 1.02 }}
                         >
                             {preview}
                         </motion.div>

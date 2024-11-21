@@ -1,7 +1,9 @@
-import { CategoryHeader } from '../categoryHeader'
 import { AnimatePresence, motion } from 'framer-motion'
+
+import { CategoryHeader } from '../categoryHeader'
 import { ElementCard } from '../elementCard'
-import { ElementBuilder, Section } from '../../../interfaces'
+
+import type { ElementBuilder, Section } from '../../../interfaces'
 
 interface Props {
     section: Section
@@ -9,19 +11,23 @@ interface Props {
     onToggle: () => void
     handleDragStart: (element: ElementBuilder) => void
 }
-export const CategorySection = ({ section, isOpen, onToggle, handleDragStart }: Props) => {
+export const CategorySection = ({
+    section,
+    isOpen,
+    onToggle,
+    handleDragStart
+}: Props): JSX.Element => {
     return (
         <div className="space-y-2">
             <CategoryHeader
-                title={section.title}
                 isOpen={isOpen}
+                title={section.title}
                 onToggle={onToggle}
             />
             <AnimatePresence>
                 {
                     isOpen && (
                         <motion.div
-                            initial={{ height: 0, opacity: 0 }}
                             animate={{
                                 height: "auto",
                                 opacity: 1,
@@ -30,6 +36,7 @@ export const CategorySection = ({ section, isOpen, onToggle, handleDragStart }: 
                                     opacity: { duration: 0.3, delay: 0.1 }
                                 }
                             }}
+                            className="overflow-hidden"
                             exit={{
                                 height: 0,
                                 opacity: 0,
@@ -38,17 +45,17 @@ export const CategorySection = ({ section, isOpen, onToggle, handleDragStart }: 
                                     opacity: { duration: 0.2 }
                                 }
                             }}
-                            className="overflow-hidden"
+                            initial={{ height: 0, opacity: 0 }}
                         >
                             <div className="space-y-2 pt-1">
                                 {section.items.map((item, index) => (
                                     <ElementCard
                                         key={index}
+                                        element={item.element}
+                                        handleDragStart={handleDragStart}
                                         icon={item.icon}
                                         label={item.label}
                                         preview={item.preview}
-                                        element={item.element}
-                                        handleDragStart={handleDragStart}
                                     />
                                 ))}
                             </div>

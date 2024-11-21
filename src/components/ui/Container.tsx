@@ -1,14 +1,15 @@
 
-import { ContainerElement } from "../../interfaces"
 import { cn } from '../../lib/utils'
+
+import type { ContainerElement } from "../../interfaces"
 
 interface Props {
     element: ContainerElement;
     children?: React.ReactNode[];
 }
 
-export const Container = ({ element, children = [] }: Props) => {
-    console.log(children)
+export const Container = ({ element, children = [] }: Props): JSX.Element => {
+
     const { direction, justify, align, gap, padding, backgroundColor, label } = element
     return (
         <div className={cn(direction, justify, align, gap, padding, backgroundColor, 'flex min-h-[100px] w-full rounded-lg border-2 border-dashed border-gray-200')}>

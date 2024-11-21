@@ -1,114 +1,178 @@
-import js from '@eslint/js'
-import globals from 'globals'
-import reactHooks from 'eslint-plugin-react-hooks'
-import reactRefresh from 'eslint-plugin-react-refresh'
-import tseslint from 'typescript-eslint'
-import jsxA11y from 'eslint-plugin-jsx-a11y'
-import importPlugin from 'eslint-plugin-import'
-import simpleImportSort from 'eslint-plugin-simple-import-sort'
+// eslint.config.js
+import typescript from "@typescript-eslint/eslint-plugin";
+import tsParser from "@typescript-eslint/parser";
+import imports from "eslint-plugin-import";
+import a11y from "eslint-plugin-jsx-a11y";
+import prettier from "eslint-plugin-prettier";
+import react from "eslint-plugin-react";
+import reactHooks from "eslint-plugin-react-hooks";
+import globals from "globals";
 
-
-export default tseslint.config(
-  // Base configuration
+export default [
   {
-    ignores: ['dist', 'build', 'coverage', '*.config.js', '*.config.ts'],
-  },
-  // TypeScript configuration
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      ...tseslint.configs.recommended,
-      js.configs.recommended,
-    ],
+    files: ["**/*.{js,jsx,ts,tsx}"],
     languageOptions: {
-      ecmaVersion: 2020,
-      sourceType: 'module',
+      ecmaVersion: "latest",
+      sourceType: "module",
+      parser: tsParser,
+      parserOptions: {
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
       globals: {
         ...globals.browser,
-        React: 'readable',
-      },
-      parser: tseslint.parser,
-      parserOptions: {
-        project: './tsconfig.json',
+        ...globals.es2021,
+        React: true,
       },
     },
     plugins: {
-      '@typescript-eslint': tseslint.plugin,
-      'react': reactPlugin,
-      'react-hooks': reactHooks,
-      'react-refresh': reactRefresh,
-      'jsx-a11y': jsxA11y,
-      'import': importPlugin,
-      'simple-import-sort': simpleImportSort,
+      "@typescript-eslint": typescript,
+      react: react,
+      "react-hooks": reactHooks,
+      import: imports,
+      prettier: prettier,
+      "jsx-a11y": a11y,
+    },
+    rules: {
+      // TypeScript específicas
+      "@typescript-eslint/no-explicit-any": "error",
+      // "@typescript-eslint/explicit-function-return-type": "error",
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        {
+          argsIgnorePattern: "^_",
+          varsIgnorePattern: "^_",
+        },
+      ],
+      // "@typescript-eslint/no-non-null-assertion": "error",
+      "@typescript-eslint/no-empty-interface": "error",
+      "@typescript-eslint/consistent-type-imports": [
+        "error",
+        {
+          prefer: "type-imports",
+        },
+      ],
+      // "@typescript-eslint/naming-convention": [
+      //   "error",
+      //   {
+      //     selector: "interface",
+      //     format: ["PascalCase"],
+      //     prefix: ["I"],
+      //   },
+      //   {
+      //     selector: "typeAlias",
+      //     format: ["PascalCase"],
+      //     prefix: ["T"],
+      //   },
+      //   {
+      //     selector: "enum",
+      //     format: ["PascalCase"],
+      //     prefix: ["E"],
+      //   },
+      // ],
+
+      // React específicas
+      "react/jsx-boolean-value": ["error", "never"],
+      "react/jsx-closing-bracket-location": ["error", "line-aligned"],
+      "react/jsx-curly-brace-presence": [
+        "error",
+        {
+          props: "never",
+          children: "never",
+        },
+      ],
+      "react/jsx-max-props-per-line": [
+        "error",
+        {
+          maximum: 1,
+          when: "multiline",
+        },
+      ],
+      "react/jsx-no-useless-fragment": "error",
+      "react/jsx-pascal-case": "error",
+      "react/jsx-sort-props": [
+        "error",
+        {
+          callbacksLast: true,
+          shorthandFirst: true,
+          ignoreCase: true,
+          reservedFirst: true,
+        },
+      ],
+      "react/hook-use-state": "error",
+      // "react/no-array-index-key": "error",
+      "react/no-unused-prop-types": "error",
+      "react/prop-types": "off", // TypeScript se encarga de esto
+      "react/react-in-jsx-scope": "off",
+      "react/require-default-props": "off", // TypeScript se encarga de esto
+
+      // React Hooks
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "error",
+
+      // Imports
+      "import/first": "error",
+      "import/newline-after-import": "error",
+      "import/no-duplicates": "error",
+      "import/order": [
+        "error",
+        {
+          groups: [
+            "builtin",
+            "external",
+            "internal",
+            "parent",
+            "sibling",
+            "index",
+            "object",
+            "type",
+          ],
+          pathGroups: [
+            {
+              pattern: "react",
+              group: "external",
+              position: "before",
+            },
+          ],
+          pathGroupsExcludedImportTypes: ["react"],
+          "newlines-between": "always",
+          alphabetize: {
+            order: "asc",
+            caseInsensitive: true,
+          },
+        },
+      ],
+
+      // Accesibilidad
+      "jsx-a11y/alt-text": "error",
+      "jsx-a11y/anchor-has-content": "error",
+      "jsx-a11y/click-events-have-key-events": "error",
+      "jsx-a11y/no-static-element-interactions": "error",
+
+      // Buenas prácticas generales
+      "no-console": ["warn", { allow: ["warn", "error"] }],
+      "no-debugger": "error",
+      "no-alert": "error",
+      "no-var": "error",
+      "prefer-const": "error",
+      "prefer-template": "error",
+      eqeqeq: ["error", "always"],
+      curly: ["error", "all"],
+      "max-len": [
+        "error",
+        {
+          code: 100,
+          ignoreComments: true,
+          ignoreStrings: true,
+          ignoreTemplateLiterals: true,
+        },
+      ],
     },
     settings: {
       react: {
-        version: 'detect',
+        version: "detect",
       },
-      'import/resolver': {
-        typescript: {},
-        node: {
-          extensions: ['.js', '.jsx', '.ts', '.tsx'],
-        },
-      },
-    },
-    rules: {
-      // TypeScript specific rules
-      '@typescript-eslint/no-explicit-any': 'warn',
-      '@typescript-eslint/explicit-module-boundary-types': 'off',
-      '@typescript-eslint/no-unused-vars': ['error', {
-        args: 'all',
-        argsIgnorePattern: '^_',
-        caughtErrors: 'all',
-        caughtErrorsIgnorePattern: '^_',
-        destructuredArrayIgnorePattern: '^_',
-        varsIgnorePattern: '^_',
-        ignoreRestSiblings: true
-      }],
-      '@typescript-eslint/no-empty-interface': 'warn',
-      '@typescript-eslint/no-empty-function': 'warn',
-      '@typescript-eslint/ban-ts-comment': 'warn',
-
-      // React rules
-      'react/prop-types': 'off',
-      'react/react-in-jsx-scope': 'off',
-      'react/display-name': 'error',
-      'react/no-array-index-key': 'warn',
-      'react/no-unused-prop-types': 'warn',
-      'react/jsx-no-useless-fragment': 'warn',
-      'react/self-closing-comp': 'warn',
-
-      // React Hooks rules
-      ...reactHooks.configs.recommended.rules,
-
-      // React Refresh
-      'react-refresh/only-export-components': [
-        'warn',
-        { allowConstantExport: true }
-      ],
-
-      // Import rules
-      'simple-import-sort/imports': 'error',
-      'simple-import-sort/exports': 'error',
-      'import/first': 'error',
-      'import/newline-after-import': 'error',
-      'import/no-duplicates': 'error',
-
-      // General rules
-      'no-console': ['warn', { allow: ['warn', 'error'] }],
-      'prefer-const': 'warn',
-      'no-nested-ternary': 'warn',
-      'no-unneeded-ternary': 'warn',
-      'spaced-comment': ['warn', 'always'],
-      'no-multiple-empty-lines': ['warn', { max: 1, maxEOF: 1 }],
-      'no-trailing-spaces': 'warn',
-      'no-unused-vars': 'off', // Disabled in favor of TypeScript's rule
-
-      // Zustand specific
-      'no-param-reassign': ['error', {
-        props: true,
-        ignorePropertyModificationsFor: ['state']
-      }],
     },
   },
-);
+];
