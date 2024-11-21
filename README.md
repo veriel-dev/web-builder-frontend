@@ -1,50 +1,114 @@
-# React + TypeScript + Vite
+# Constructor Web Moderno
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Un constructor de páginas web flexible e intuitivo con funcionalidad de arrastrar y soltar, construido con React, TypeScript y Zustand. Este proyecto permite a los usuarios crear diseños web responsivos utilizando un enfoque moderno basado en componentes, con soporte para contenedores flex y grid.
 
-Currently, two official plugins are available:
+## Características
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 📱 Vista previa de diseño responsivo (Escritorio, Tablet, Móvil)
+- 🎨 Interfaz de arrastrar y soltar
+- 📦 Sistema de contenedores flexible
+  - Contenedores Flex con dirección y alineación personalizables
+  - Contenedores Grid con columnas ajustables
+- 🧩 Componentes básicos
+  - Encabezados
+  - Párrafos
+  - Botones
+  - Secciones Hero
+- 💾 Gestión de estado con Zustand
+- 🔄 Funcionalidad de Deshacer/Rehacer
+- 👁️ Modo de vista previa en vivo
+- 💻 Opción de exportar código
 
-## Expanding the ESLint configuration
+## Stack Tecnológico
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **React**: Framework de frontend
+- **TypeScript**: Seguridad de tipos y mejor experiencia de desarrollo
+- **Zustand**: Gestión de estado
+- **Tailwind CSS**: Estilos y utilidades
+- **Lucide React**: Sistema de iconos
 
-- Configure the top-level `parserOptions` property like this:
+## Estructura del Proyecto
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```
+src/
+├── components/
+│   └── ui/
+│       └── card.tsx
+├── interfaces/
+│   └── index.ts
+├── store/
+│   └── index.tsx
+└── pages/
+    └── ModernBuilder.tsx
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Gestión de Estado
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+El proyecto utiliza Zustand con un patrón de slices para una mejor organización del estado:
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+- **Slice de Elementos**: Gestiona los elementos de la página y sus modificaciones
+- **Slice de Arrastrar y Soltar**: Maneja la funcionalidad de arrastrar y soltar
+- **Slice del Editor**: Controla el estado del editor y la configuración de vista previa de dispositivos
+
+## Tipos de Elementos
+
+El constructor soporta varios tipos de elementos:
+
+```typescript
+type ElementBuilder =
+  | HeadingElement
+  | ParagraphElement
+  | ButtonElement
+  | HeroElement 
+  | ContainerElement
+  | ContainerGridElement;
 ```
+
+Cada tipo de elemento tiene sus propias propiedades personalizables:
+
+- **Propiedades Base**
+  - id
+  - tipo
+  - etiqueta
+  - tamaño de fuente
+  - color
+  - color de fondo
+  - icono
+
+- **Propiedades específicas de Contenedores**
+  - dirección
+  - justificación
+  - alineación
+  - espaciado
+  - relleno
+
+## Comenzando
+
+1. Instalar dependencias:
+```bash
+npm install
+# o
+yarn install
+```
+
+2. Iniciar el servidor de desarrollo:
+```bash
+npm run dev
+# o
+yarn dev
+```
+
+3. Abrir el navegador y navegar a `http://localhost:3000`
+
+## Uso
+
+1. **Añadir Elementos**
+   - Arrastra elementos desde la barra lateral izquierda al lienzo
+   - Los elementos pueden soltarse en contenedores o en el lienzo principal
+
+2. **Editar Elementos**
+   - Haz clic en el icono de configuración de cualquier elemento para abrir su panel de propiedades
+   - Modifica texto, estilos y propiedades de diseño
+
+3. **Gestión de Contenedores**
+   - Usa contenedo
