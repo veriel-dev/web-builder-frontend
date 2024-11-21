@@ -9,6 +9,7 @@ type CommonProps = {
   color?: string;
   backgroundColor?: string;
   icon?: LucideIcon;
+  children?: ElementBuilder[]; 
 };
 
 type TextProps = {

@@ -3,12 +3,12 @@ import { DeviceType } from "../../../interfaces"
 import { CanvasArea } from "../canvasArea"
 
 interface Props {
-  activeDevice: DeviceType
-  setActiveDevice: React.Dispatch<React.SetStateAction<DeviceType>>
+  selectedDevice: DeviceType
+  setSelectedDevice: (device: DeviceType) => void
   setIsPreviewMode: React.Dispatch<React.SetStateAction<boolean>>
   isPreviewMode: boolean 
 }
-export const PreviewMode = ({activeDevice, setActiveDevice, setIsPreviewMode, isPreviewMode}:Props) => {
+export const PreviewMode = ({selectedDevice, setSelectedDevice, setIsPreviewMode, isPreviewMode}:Props) => {
   
   return (
     <div className="fixed inset-0 bg-slate-50 z-50">
@@ -17,20 +17,20 @@ export const PreviewMode = ({activeDevice, setActiveDevice, setIsPreviewMode, is
           {/* Device Selector */}
           <div className="flex items-center gap-2 bg-white rounded-lg shadow-sm border p-1">
             <button 
-              className={`p-2 rounded-md transition-colors ${activeDevice === 'desktop' ? 'bg-violet-50 text-violet-700' : 'hover:bg-slate-50'}`}
-              onClick={() => setActiveDevice('desktop')}
+              className={`p-2 rounded-md transition-colors ${selectedDevice === 'desktop' ? 'bg-violet-50 text-violet-700' : 'hover:bg-slate-50'}`}
+              onClick={() => setSelectedDevice('desktop')}
             >
               <Monitor className="w-5 h-5" />
             </button>
             <button 
-              className={`p-2 rounded-md transition-colors ${activeDevice === 'tablet' ? 'bg-violet-50 text-violet-700' : 'hover:bg-slate-50'}`}
-              onClick={() => setActiveDevice('tablet')}
+              className={`p-2 rounded-md transition-colors ${selectedDevice === 'tablet' ? 'bg-violet-50 text-violet-700' : 'hover:bg-slate-50'}`}
+              onClick={() => setSelectedDevice('tablet')}
             >
               <Tablet className="w-5 h-5" />
             </button>
             <button 
-              className={`p-2 rounded-md transition-colors ${activeDevice === 'mobile' ? 'bg-violet-50 text-violet-700' : 'hover:bg-slate-50'}`}
-              onClick={() => setActiveDevice('mobile')}
+              className={`p-2 rounded-md transition-colors ${selectedDevice === 'mobile' ? 'bg-violet-50 text-violet-700' : 'hover:bg-slate-50'}`}
+              onClick={() => setSelectedDevice('mobile')}
             >
               <Smartphone className="w-5 h-5" />
             </button>
@@ -48,7 +48,7 @@ export const PreviewMode = ({activeDevice, setActiveDevice, setIsPreviewMode, is
 
         {/* Preview Content */}
         <CanvasArea 
-          activeDevice={activeDevice} 
+          selectedDevice={selectedDevice} 
           isPreviewMode={isPreviewMode}
         />
       </div>

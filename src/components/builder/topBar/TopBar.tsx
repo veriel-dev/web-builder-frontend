@@ -3,11 +3,11 @@ import React from 'react'
 import { DeviceType } from '../../../interfaces'
 
 interface Props {
-    activeDevice: string
-    setActiveDevice: React.Dispatch<React.SetStateAction<DeviceType>>
+    selectedDevice: string
+    setSelectedDevice: (device: DeviceType) => void
     setIsPreviewMode: React.Dispatch<React.SetStateAction<boolean>>
 }
-export const TopBar = ({activeDevice, setActiveDevice, setIsPreviewMode}:Props) => {
+export const TopBar = ({selectedDevice, setSelectedDevice, setIsPreviewMode}:Props) => {
     return (
         <div className="h-16 border-b bg-white px-4 flex items-center justify-between">
             <div className="flex items-center gap-4">
@@ -21,20 +21,20 @@ export const TopBar = ({activeDevice, setActiveDevice, setIsPreviewMode}:Props) 
 
             <div className="flex items-center gap-2 bg-slate-100 p-1 rounded-lg">
                 <button
-                    className={`p-2 rounded-md transition-colors ${activeDevice === 'desktop' ? 'bg-white shadow-sm' : 'hover:bg-slate-200'}`}
-                    onClick={() => setActiveDevice('desktop')}
+                    className={`p-2 rounded-md transition-colors ${selectedDevice === 'desktop' ? 'bg-white shadow-sm' : 'hover:bg-slate-200'}`}
+                    onClick={() => setSelectedDevice('desktop')}
                 >
                     <Monitor className="w-5 h-5" />
                 </button>
                 <button
-                    className={`p-2 rounded-md transition-colors ${activeDevice === 'tablet' ? 'bg-white shadow-sm' : 'hover:bg-slate-200'}`}
-                    onClick={() => setActiveDevice('tablet')}
+                    className={`p-2 rounded-md transition-colors ${selectedDevice === 'tablet' ? 'bg-white shadow-sm' : 'hover:bg-slate-200'}`}
+                    onClick={() => setSelectedDevice('tablet')}
                 >
                     <Tablet className="w-5 h-5" />
                 </button>
                 <button
-                    className={`p-2 rounded-md transition-colors ${activeDevice === 'mobile' ? 'bg-white shadow-sm' : 'hover:bg-slate-200'}`}
-                    onClick={() => setActiveDevice('mobile')}
+                    className={`p-2 rounded-md transition-colors ${selectedDevice === 'mobile' ? 'bg-white shadow-sm' : 'hover:bg-slate-200'}`}
+                    onClick={() => setSelectedDevice('mobile')}
                 >
                     <Smartphone className="w-5 h-5" />
                 </button>

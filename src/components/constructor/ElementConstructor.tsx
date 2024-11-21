@@ -31,6 +31,7 @@ const sections: Sections = [
                     gap: 'gap-4',
                     padding: 'p-4',
                     backgroundColor: 'bg-transparent',
+                    children: []
                 }
             },
             {
@@ -52,6 +53,7 @@ const sections: Sections = [
                     gap: 'gap-4',
                     padding: 'p-4',
                     backgroundColor: 'bg-transparent',
+                    children: []
                 }
             }
         ],
@@ -160,7 +162,6 @@ export const ElementConstructor = ({ handleDragStart }: Props) => {
                         isOpen={activeSection === section.id}
                         onToggle={() => toggleSection(section.id)}
                         handleDragStart={handleDragStart}
-
                     />
                 ))}
             </div>
