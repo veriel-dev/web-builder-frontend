@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .custom-scrollable-content {
+    @apply flex items-center gap-1 justify-start flex-wrap cursor-pointer h-[140px] overflow-y-auto overflow-x-hidden;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .custom-scrollable-content::-webkit-scrollbar {
+    display: none;
+  }
+}

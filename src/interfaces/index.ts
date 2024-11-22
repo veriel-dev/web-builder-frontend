@@ -3,7 +3,6 @@ import type { ReactNode } from "react";
 import type { deviceWidths } from "../const";
 import type { LucideIcon } from "lucide-react";
 
-// Propiedades base comunes para todos los elementos
 type CommonProps = {
   id?: number;
   label?: string;
@@ -12,6 +11,14 @@ type CommonProps = {
   backgroundColor?: string;
   icon?: LucideIcon;
   children?: ElementBuilder[];
+  text?: string;
+  subtitle?: string;
+  direction?: string;
+  justify?: string;
+  align?: string;
+  gap?: string;
+  padding?: string;
+  cols?: string;
 };
 
 type TextProps = {

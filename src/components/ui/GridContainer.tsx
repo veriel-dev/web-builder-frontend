@@ -10,13 +10,13 @@ interface Props {
 
 
 export const GridContainer = ({ element, children = [] }: Props): JSX.Element => {
-    const { cols, gap, padding, backgroundColor, label } = element
+    const { cols, gap, padding, backgroundColor, label, color, fontSize } = element
     return (
-        <div className={cn(cols, gap, padding, backgroundColor, "grid min-h-[100px] w-full rounded-lg border-2 border-dashed border-gray-200")}>
+        <div className={cn(cols, gap, padding, backgroundColor, color, fontSize, "grid min-h-[100px] w-full rounded-lg border-2 border-dashed border-gray-200")}>
             {children.length > 0 ? children : (
-                <div className="text-gray-400 opacity-30 text-4xl font-bold w-full col-span-2 text-center">
+                <span className="font-bold text-start">
                     {label}
-                </div>
+                </span>
             )}
         </div>
     );

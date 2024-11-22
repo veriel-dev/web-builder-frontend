@@ -1,30 +1,34 @@
-import { Clipboard, Grid3X3, Heading, HeartIcon, Table2, Text } from "lucide-react";
-
-
-
+import {
+  Clipboard,
+  Grid3X3,
+  Heading,
+  HeartIcon,
+  Table2,
+  Text,
+} from "lucide-react";
 
 const containerElemenst = [
   {
-    type: 'grid-container',
-    label: 'Grid',
-    cols: 'grid-cols-2',
-    gap: 'gap-4',
-    padding: 'p-4',
-    backgroundColor: 'bg-transparent',
-    icon: Grid3X3
+    type: "grid-container",
+    label: "Grid",
+    cols: "grid-cols-2",
+    gap: "gap-4",
+    padding: "p-4",
+    backgroundColor: "bg-transparent",
+    icon: Grid3X3,
   },
   {
-    type: 'container', 
-    label: 'Flex', 
-    direction: 'flex-row',
-    justify: 'justify-start',
-    align: 'items-start',
-    gap: 'gap-4',
-    padding: 'p-4',
-    backgroundColor: 'bg-transparent',
-    icon: Table2
-  }
-]
+    type: "container",
+    label: "Flex",
+    direction: "flex-row",
+    justify: "justify-start",
+    align: "items-start",
+    gap: "gap-4",
+    padding: "p-4",
+    backgroundColor: "bg-transparent",
+    icon: Table2,
+  },
+];
 const singleElements = [
   {
     type: "heading",
@@ -33,7 +37,7 @@ const singleElements = [
     fontSize: "text-3xl",
     color: "text-gray-900",
     backgroundColor: "bg-white",
-    icon: Heading
+    icon: Heading,
   },
   {
     type: "paragraph",
@@ -42,7 +46,7 @@ const singleElements = [
     fontSize: "text-base",
     color: "text-gray-600",
     backgroundColor: "bg-white",
-    icon: Text
+    icon: Text,
   },
   {
     type: "button",
@@ -51,7 +55,7 @@ const singleElements = [
     fontSize: "text-sm",
     color: "text-white",
     backgroundColor: "bg-indigo-600",
-    icon: Clipboard
+    icon: Clipboard,
   },
   {
     type: "hero",
@@ -61,7 +65,7 @@ const singleElements = [
     fontSize: "text-4xl",
     color: "text-white",
     backgroundColor: "bg-indigo-600",
-    icon: HeartIcon
+    icon: HeartIcon,
   },
 ];
 
@@ -102,16 +106,11 @@ const templates = {
 };
 
 export const deviceWidths = {
-  desktop: 'w-full',
-  tablet: 'w-[768px]',
-  mobile: 'w-[375px]'
+  desktop: "w-full",
+  tablet: "w-[768px]",
+  mobile: "w-[375px]",
 } as const;
 
-
-
-export const containerClasses = "relative min-h-[100px] w-full rounded-lg border-2 transition-colors duration-200 border-dashed border-gray-200"
-export {
-  singleElements,
-  containerElemenst,
-  templates
-}
+export const containerClasses =
+  "relative min-h-[100px] w-full rounded-lg border-2 transition-colors duration-200 border-dashed border-gray-200";
+export { singleElements, containerElemenst, templates };

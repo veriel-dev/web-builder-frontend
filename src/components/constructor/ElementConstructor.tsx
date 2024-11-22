@@ -31,10 +31,12 @@ const sections: Sections = [
                 element: {
                     type: 'grid-container',
                     label: 'Grid',
-                    cols: 'grid-cols-2',
+                    cols: 'grid-cols-1',
                     gap: 'gap-4',
                     padding: 'p-4',
                     backgroundColor: 'bg-transparent',
+                    color: "text-gray-400",
+                    fontSize: "tex-base",
                     children: []
                 }
             },

@@ -49,7 +49,6 @@ export const ElementEditor = (
                     element.type === "grid-container" && (
                         <GridContainer
                             element={element}
-                            updateElement={updateElement}
                         />
                     )
                 }
