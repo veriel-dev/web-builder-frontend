@@ -83,7 +83,7 @@ const sections: Sections = [
                     text: "Título de ejemplo",
                     fontSize: "text-3xl",
                     color: "text-gray-900",
-                    backgroundColor: "bg-white",
+                    backgroundColor: "bg-transparent",
                 }
             },
             {
@@ -102,7 +102,7 @@ const sections: Sections = [
                     text: "Texto de párrafo de ejemplo",
                     fontSize: "text-base",
                     color: "text-gray-600",
-                    backgroundColor: "bg-white",
+                    backgroundColor: "bg-transparent",
                 }
             },
             {

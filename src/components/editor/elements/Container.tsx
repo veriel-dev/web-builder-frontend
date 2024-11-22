@@ -1,7 +1,4 @@
-
-import { useState } from 'react';
-
-import { Type, Layout, MoveHorizontal, AlignLeft, Columns, ChevronDown, ArrowLeftRight, Move } from 'lucide-react';
+import { Type, MoveHorizontal, AlignLeft, Columns, ChevronDown, ArrowLeftRight, Move } from 'lucide-react';
 
 import { bgOptions, colorTextOptions } from '../../../const/colors';
 import { selectores } from '../../../const/container';
@@ -9,6 +6,7 @@ import { selectores } from '../../../const/container';
 import { ColorPicker } from './colorPicker';
 import { Selector } from './selector/Selector';
 import { SelectorFlex } from './selectorFlex/SelectorFlex';
+import { Tabs } from './tabs';
 
 import type { ContainerElement, ElementBuilder } from '../../../interfaces'
 
@@ -16,38 +14,10 @@ interface Props {
     element: Extract<ElementBuilder, ContainerElement>;
 }
 export const Container = ({ element }: Props): JSX.Element => {
-    const [activeTab, setActiveTab] = useState<'style' | 'layout'>('style');
     return (
         <>
             {/* Tabs */}
-            <div className="border-b border-gray-100">
-                <nav className="flex">
-                    <button
-                        className={`flex-1 px-4 py-3 text-sm font-medium transition-colors ${activeTab === 'style'
-                            ? 'text-gray-900 border-b-2 border-indigo-500'
-                            : 'text-gray-500 hover:text-gray-700'
-                            }`}
-                        onClick={() => setActiveTab('style')}
-                    >
-                        <div className="flex items-center justify-center gap-2">
-                            <Type className="w-4 h-4" />
-                            <span>Estilo</span>
-                        </div>
-                    </button>
-                    <button
-                        className={`flex-1 px-4 py-3 text-sm font-medium transition-colors ${activeTab === 'layout'
-                            ? 'text-gray-900 border-b-2 border-indigo-500'
-                            : 'text-gray-500 hover:text-gray-700'
-                            }`}
-                        onClick={() => setActiveTab('layout')}
-                    >
-                        <div className="flex items-center justify-center gap-2">
-                            <Layout className="w-4 h-4" />
-                            <span>Layout</span>
-                        </div>
-                    </button>
-                </nav>
-            </div>
+            <Tabs />
             {/* Content */}
             <div className=" flex gap-6">
                 <div className='flex-1 space-y-4'>

@@ -14,7 +14,7 @@ export const Container = ({ element, children = [] }: Props): JSX.Element => {
         direction, justify, align, gap, padding, backgroundColor, label, fontSize, color } = element
     return (
         <div className={cn(
-            direction, justify, align, gap, padding, backgroundColor, fontSize, color, 'flex min-h-[100px] w-full rounded-lg border-2 border-dashed border-gray-200')}
+            direction, justify, align, gap, padding, backgroundColor, fontSize, color, 'flex  flex-wrap min-h-[100px] w-full rounded-lg border-2 border-dashed border-gray-200')}
         >
             {children.length > 0 ? children : (
                 <div className="font-bold text-start">
