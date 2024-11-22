@@ -1,92 +1,126 @@
 
-import type { ContainerElement, ElementBuilder, UpdatesByType } from '../../../interfaces'
+import { useState } from 'react';
+
+import { Type, Layout, MoveHorizontal, AlignLeft, Columns, ChevronDown, ArrowLeftRight, Move } from 'lucide-react';
+
+import { bgOptions, colorTextOptions } from '../../../const/colors';
+import { selectores } from '../../../const/container';
+
+import { ColorPicker } from './colorPicker';
+import { Selector } from './selector/Selector';
+import { SelectorFlex } from './selectorFlex/SelectorFlex';
+
+import type { ContainerElement, ElementBuilder } from '../../../interfaces'
 
 interface Props {
     element: Extract<ElementBuilder, ContainerElement>;
-    updateElement: (id: number, updates: UpdatesByType[keyof UpdatesByType]) => void;
 }
-export const Container = ({ element, updateElement }: Props): JSX.Element => {
+export const Container = ({ element }: Props): JSX.Element => {
+    const [activeTab, setActiveTab] = useState<'style' | 'layout'>('style');
     return (
-        <div>
-            <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Dirección
-                </label>
-                <select
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                    value={element.direction}
-                    onChange={(e) => updateElement(
-                        element.id as number, { direction: e.target.value })}
-                >
-                    <option value="row">Horizontal</option>
-                    <option value="column">Vertical</option>
-                </select>
+        <>
+            {/* Tabs */}
+            <div className="border-b border-gray-100">
+                <nav className="flex">
+                    <button
+                        className={`flex-1 px-4 py-3 text-sm font-medium transition-colors ${activeTab === 'style'
+                            ? 'text-gray-900 border-b-2 border-indigo-500'
+                            : 'text-gray-500 hover:text-gray-700'
+                            }`}
+                        onClick={() => setActiveTab('style')}
+                    >
+                        <div className="flex items-center justify-center gap-2">
+                            <Type className="w-4 h-4" />
+                            <span>Estilo</span>
+                        </div>
+                    </button>
+                    <button
+                        className={`flex-1 px-4 py-3 text-sm font-medium transition-colors ${activeTab === 'layout'
+                            ? 'text-gray-900 border-b-2 border-indigo-500'
+                            : 'text-gray-500 hover:text-gray-700'
+                            }`}
+                        onClick={() => setActiveTab('layout')}
+                    >
+                        <div className="flex items-center justify-center gap-2">
+                            <Layout className="w-4 h-4" />
+                            <span>Layout</span>
+                        </div>
+                    </button>
+                </nav>
             </div>
-
-            <div className="mt-4">
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Alineación
-                </label>
-                <select
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                    value={element.align}
-                    onChange={(e) => updateElement(element.id as number, { align: e.target.value })}
-                >
-                    <option value="start">Inicio</option>
-                    <option value="center">Centro</option>
-                    <option value="end">Fin</option>
-                </select>
+            {/* Content */}
+            <div className=" flex gap-6">
+                <div className='flex-1 space-y-4'>
+                    {/* Direction */}
+                    <SelectorFlex
+                        cols="grid-cols-2"
+                        element={element}
+                        iconType={MoveHorizontal}
+                        keyValue='direction'
+                        selector={selectores.direction}
+                        title="Dirección"
+                    />
+                    {/* Align */}
+                    <SelectorFlex
+                        cols="grid-cols-3"
+                        element={element}
+                        iconType={AlignLeft}
+                        keyValue="align"
+                        selector={selectores.align}
+                        title="Alineación"
+                    />
+                    {/* Justify */}
+                    <SelectorFlex
+                        cols="grid-cols-3"
+                        element={element}
+                        iconType={Columns}
+                        keyValue="justify"
+                        selector={selectores.justify}
+                        title="Justificación"
+                    />
+                    <Selector
+                        element={element}
+                        icon={ChevronDown}
+                        iconType={Move}
+                        keyValue="padding"
+                        label='Padding'
+                        options={selectores.padding}
+                    />
+                    {/* Gap */}
+                    <Selector
+                        element={element}
+                        icon={ChevronDown}
+                        iconType={ArrowLeftRight}
+                        keyValue="gap"
+                        label='Espacio entre elementos'
+                        options={selectores.gap}
+                    />
+                    <Selector
+                        element={element}
+                        icon={ChevronDown}
+                        iconType={Type}
+                        keyValue="fontSize"
+                        label="Tamaño de Letra"
+                        options={selectores.fontSize}
+                    />
+                </div>
+                <div className='flex-1 space-y-4' >
+                    {/* Color Picker - Background Color */}
+                    <ColorPicker
+                        colorOptions={bgOptions}
+                        element={element}
+                        keyValue="backgroundColor"
+                        label="Color de fondo"
+                    />
+                    {/* Color Picker - Color */}
+                    <ColorPicker
+                        colorOptions={colorTextOptions}
+                        element={element}
+                        keyValue="color"
+                        label="Color de texto"
+                    />
+                </div>
             </div>
-
-            <div className="mt-4">
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Justificación
-                </label>
-                <select
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                    value={element.justify}
-                    onChange={(e) => updateElement(
-                        element.id as number, { justify: e.target.value })}
-                >
-                    <option value="start">Inicio</option>
-                    <option value="center">Centro</option>
-                    <option value="end">Fin</option>
-                    <option value="between">Entre elementos</option>
-                </select>
-            </div>
-
-            <div className="mt-4">
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Espacio entre elementos
-                </label>
-                <select
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                    value={element.gap}
-                    onChange={(e) => updateElement(element.id as number, { gap: e.target.value })}
-                >
-                    <option value="gap-0">Sin espacio</option>
-                    <option value="gap-2">Pequeño</option>
-                    <option value="gap-4">Medio</option>
-                    <option value="gap-6">Grande</option>
-                </select>
-            </div>
-
-            <div className="mt-4">
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Padding
-                </label>
-                <select
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                    value={element.padding}
-                    onChange={(e) => updateElement(
-                        element.id as number, { padding: e.target.value })}
-                >
-                    <option value="p-0">Sin padding</option>
-                    <option value="p-2">Pequeño</option>
-                    <option value="p-4">Medio</option>
-                    <option value="p-6">Grande</option>
-                </select>
-            </div>
-        </div>
+        </>
     )
 }

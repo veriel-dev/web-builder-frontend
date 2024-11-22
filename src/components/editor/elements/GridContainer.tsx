@@ -1,3 +1,7 @@
+import { useState } from 'react';
+
+import { Type, Layout, Grid, ChevronDown, Move, ArrowLeftRight } from 'lucide-react';
+
 import { bgOptions, colorTextOptions } from '../../../const/colors';
 import { selectores } from '../../../const/grid-container';
 
@@ -12,59 +16,94 @@ interface Props {
 }
 
 export const GridContainer = ({ element }: Props): JSX.Element => {
+    const [activeTab, setActiveTab] = useState<'style' | 'layout'>('style');
     return (
-        <div>
-            <div className="mt-4">
+        <>
+            {/* Tabs */}
+            <div className="border-b border-gray-100">
+                <nav className="flex">
+                    <button
+                        className={`flex-1 px-4 py-3 text-sm font-medium transition-colors ${activeTab === 'style'
+                            ? 'text-gray-900 border-b-2 border-indigo-500'
+                            : 'text-gray-500 hover:text-gray-700'
+                            }`}
+                        onClick={() => setActiveTab('style')}
+                    >
+                        <div className="flex items-center justify-center gap-2">
+                            <Type className="w-4 h-4" />
+                            <span>Estilo</span>
+                        </div>
+                    </button>
+                    <button
+                        className={`flex-1 px-4 py-3 text-sm font-medium transition-colors ${activeTab === 'layout'
+                            ? 'text-gray-900 border-b-2 border-indigo-500'
+                            : 'text-gray-500 hover:text-gray-700'
+                            }`}
+                        onClick={() => setActiveTab('layout')}
+                    >
+                        <div className="flex items-center justify-center gap-2">
+                            <Layout className="w-4 h-4" />
+                            <span>Layout</span>
+                        </div>
+                    </button>
+                </nav>
+            </div>
+            {/* Content */}
+            <div className="space-y-4">
+                {/* Grid Columns */}
                 <Selector
                     element={element}
+                    icon={ChevronDown}
+                    iconType={Grid}
                     keyValue="cols"
                     label="Columnas"
                     options={selectores.cols}
                 />
-            </div>
-            <div className="mt-4">
-                <Selector
-                    element={element}
-                    keyValue="gap"
-                    label="Espacio entre elementos"
-                    options={selectores.gap}
-                />
-            </div>
+                {/* Spacing Control */}
 
-            <div className="mt-4">
                 <Selector
                     element={element}
+                    icon={ChevronDown}
+                    iconType={Move}
                     keyValue="padding"
-                    label="Padding"
+                    label='Padding'
                     options={selectores.padding}
                 />
-            </div>
-            <div className="mt-4">
-
+                {/* Gap */}
                 <Selector
                     element={element}
+                    icon={ChevronDown}
+                    iconType={ArrowLeftRight}
+                    keyValue="gap"
+                    label='Espacio entre elementos'
+                    options={selectores.gap}
+                />
+
+                {/* Font Size */}
+                <Selector
+                    element={element}
+                    icon={ChevronDown}
+                    iconType={Type}
                     keyValue="fontSize"
-                    label="Tamaño de letra"
+                    label="Tamaño de Letra"
                     options={selectores.fontSize}
                 />
-            </div>
-
-            <div className="mt-4">
+                {/* Color Picker - Background Color */}
                 <ColorPicker
                     colorOptions={bgOptions}
                     element={element}
                     keyValue="backgroundColor"
                     label="Color de fondo"
                 />
-            </div>
-            <div className="mt-4">
+                {/* Color Picker - Color */}
                 <ColorPicker
                     colorOptions={colorTextOptions}
                     element={element}
                     keyValue="color"
-                    label="Color"
+                    label="Color de texto"
                 />
             </div>
-        </div >
+
+        </>
     );
 };

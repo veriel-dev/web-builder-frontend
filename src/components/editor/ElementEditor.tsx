@@ -12,8 +12,10 @@ interface Props {
 }
 export const ElementEditor = (
     { element, updateElement }: Props): JSX.Element => {
+
+    const widthElement = element.type === "container" ? "w-[550px]" : "w-72"
     return (
-        <div className="absolute top-full left-0 mt-2 p-4 bg-white rounded-lg shadow-xl border border-gray-200 z-10 w-72">
+        <div className={`absolute top-full left-0 mt-2 p-4 bg-white rounded-lg shadow-xl border border-gray-200 z-10 ${widthElement}`}>
             <div className="space-y-4">
                 {
                     element.type === "paragraph" && (
@@ -41,7 +43,6 @@ export const ElementEditor = (
                     element.type === "container" && (
                         <Container
                             element={element}
-                            updateElement={updateElement}
                         />
                     )
                 }

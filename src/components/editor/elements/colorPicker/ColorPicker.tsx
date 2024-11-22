@@ -1,4 +1,6 @@
 
+import { Paintbrush } from "lucide-react"
+
 import { cn } from "../../../../lib/utils"
 import { useWebBuilderStore } from "../../../../store/store"
 
@@ -14,11 +16,12 @@ interface Props {
 export const ColorPicker = ({ label, element, keyValue, colorOptions }: Props) => {
   const { updateElement } = useWebBuilderStore()
   return (
-    <>
-      <label className="block text-sm font-medium text-gray-700 mb-1">
+    <div className="space-y-2">
+      <label className="flex items-center gap-2 text-sm font-medium text-gray-700">
+        <Paintbrush className="w-4 h-4" />
         {label}
       </label>
-      <div className="w-full">
+      <div className="relative">
         <button className="w-full px-3 py-2 border border-gray-300 rounded-md flex items-center gap-2 mb-2">
           {
             keyValue === "backgroundColor" && (
@@ -71,6 +74,7 @@ export const ColorPicker = ({ label, element, keyValue, colorOptions }: Props) =
             )
           }
         </div>
-      </div></>
+      </div>
+    </div>
   )
 }
