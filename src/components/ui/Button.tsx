@@ -1,13 +1,38 @@
 import { cn } from "../../lib/utils";
 
-import type { ButtonProps } from "../../interfaces";
+import type { ElementBuilder } from "../../interfaces";
 
-
-
-export const Button = ({ text, fontSize, color, backgroundColor }: ButtonProps): JSX.Element => {
+export const Button = ({
+    display,
+    align,
+    justify,
+    gap,
+    text,
+    fontSize,
+    color,
+    backgroundColor,
+    fontWeight,
+    padding,
+    borderRadius,
+    hover
+}: ElementBuilder): JSX.Element => {
     return (
-        <button className={cn(`${fontSize} ${color} ${backgroundColor}`, `ppx-6 py-2 rounded-md shadow-sm hover:opacity-90`)}>
+        <button
+            className={cn(
+                hover,
+                display,
+                align,
+                justify,
+                gap,
+                fontSize,
+                color,
+                backgroundColor,
+                fontWeight,
+                padding,
+                borderRadius,
+                "h-auto w-auto")}
+        >
             {text}
-        </button>
+        </button >
     );
 };

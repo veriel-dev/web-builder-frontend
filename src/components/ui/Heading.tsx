@@ -2,12 +2,25 @@ import { cn } from "../../lib/utils"
 
 import type { HeadingProps } from "../../interfaces"
 
-
-
-export const Heading = ({ text, fontSize, color, backgroundColor }: HeadingProps): JSX.Element => {
+export const Heading = ({
+    text,
+    fontSize,
+    color,
+    textPosition,
+    padding,
+    margin,
+    fontWeight,
+    level = 'h2',
+    toggleIsEditing,
+}: HeadingProps): JSX.Element => {
+    const HeadingComponent = level
     return (
-        <h2 className={cn(`${fontSize} ${color} ${backgroundColor}`, 'font-bold')}>{
-            text}
-        </h2>
+        <HeadingComponent className={
+            cn("relative", "cursor-pointer", fontSize, color, textPosition, padding, margin, fontWeight)}
+            onClick={toggleIsEditing}
+        >
+            {text}
+        </HeadingComponent>
+
     )
 }

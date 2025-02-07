@@ -7,6 +7,7 @@ type CommonProps = {
   id?: number;
   label?: string;
   fontSize?: string;
+  fontWeight?: string;
   color?: string;
   backgroundColor?: string;
   icon?: LucideIcon;
@@ -19,10 +20,24 @@ type CommonProps = {
   gap?: string;
   padding?: string;
   cols?: string;
+  src?: string;
+  alt?: string;
+  width?: string;
+  height?: string;
+  objectFit?: string;
+  textPosition?: string;
+  margin?: string;
+  rows?: string;
+  level?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+  display?: string;
+  borderRadius?: string;
+  hover?: string;
+  toggleIsEditing?: () => void;
 };
 
 type TextProps = {
   text: string;
+  fontWeight: string;
 };
 
 type HeroSpecificProps = TextProps & {
@@ -38,13 +53,27 @@ type ContainerSpecificProps = {
 };
 
 type GridContainerSpecificProps = {
+  rows: string;
   cols: string;
   gap: string;
   padding: string;
 };
+
+type ImgSpecificProps = {
+  src: string;
+  alt: string;
+  width: string;
+  height: string;
+  objectFit: string;
+};
 export type HeadingElement = CommonProps &
   TextProps & {
     type: "heading";
+    textPosition: string;
+    padding: string;
+    margin: string;
+    fontWeight: string;
+    level: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
   };
 
 export type ParagraphElement = CommonProps &
@@ -54,6 +83,9 @@ export type ParagraphElement = CommonProps &
 
 export type ButtonElement = CommonProps &
   TextProps & {
+    display?: string,
+    borderRadius?: string,
+    hover?: string,
     type: "button";
   };
 
@@ -62,6 +94,10 @@ export type HeroElement = CommonProps &
     type: "hero";
   };
 
+export type ImgElement = CommonProps &
+  ImgSpecificProps & {
+    type: "img";
+  };
 export type ContainerElement = CommonProps &
   ContainerSpecificProps & {
     type: "container";
@@ -89,6 +125,8 @@ export type ContainerProps = BaseElementProps & ContainerSpecificProps;
 
 export type ContainerGridProps = BaseElementProps & GridContainerSpecificProps;
 
+export type ImgProps = BaseElementProps & ImgSpecificProps;
+
 // Tipo unión para todos los elementos
 export type ElementBuilder =
   | HeadingElement
@@ -96,7 +134,8 @@ export type ElementBuilder =
   | ButtonElement
   | HeroElement
   | ContainerElement
-  | ContainerGridElement;
+  | ContainerGridElement
+  | ImgElement;
 
 // Tipos para actualizaciones
 export type UpdatesByType = {
@@ -106,6 +145,7 @@ export type UpdatesByType = {
   hero: Partial<Omit<HeroElement, "id" | "type">>;
   container: Partial<Omit<ContainerElement, "id" | "type">>;
   "grid-container": Partial<Omit<ContainerGridElement, "id" | "type">>;
+  img: Partial<Omit<ImageBitmap, "id" | "type">>;
 };
 
 type SectionItem = {
@@ -115,7 +155,7 @@ type SectionItem = {
   element: ElementBuilder;
 };
 export type Section = {
-  id: "containers" | "elements";
+  id: "containers" | "elements" | "templates";
   title: string;
   items: SectionItem[];
 };

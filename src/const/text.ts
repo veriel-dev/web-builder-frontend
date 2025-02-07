@@ -1,0 +1,43 @@
+export const selectores = {
+  fontSize: [
+    { value: "text-xs", text: "Tamaño XS" },
+    { value: "text-sm", text: "Tamaño SM" },
+    { value: "text-base", text: "Tamaño M" },
+    { value: "text-lg", text: "Tamaño LG" },
+    { value: "text-xl", text: "Tamaño XL" },
+    { value: "text-2xl", text: "Tamaño 2XL" },
+    { value: "text-3xl", text: "Tamaño 3XL" },
+    { value: "text-4xl", text: "Tamaño 4XL" },
+  ],
+  fontWeight: [
+    { value: "font-thin", text: "Thin" },
+    { value: "font-extralight", text: "Extra Light" },
+    { value: "font-light", text: "Light" },
+    { value: "font-normal", text: "Normal" },
+    { value: "font-medium", text: "Medium" },
+    { value: "font-semibold", text: "Semi Bold" },
+    { value: "font-bold", text: "Bold" },
+    { value: "font-extrabold", text: "Extra Bold" },
+    { value: "font-black", text: "Black" },
+  ],
+  textPosition: [
+    { value: "text-left", text: "Izquierda" },
+    { value: "text-center", text: "Centro" },
+    { value: "text-right", text: "Derecha" },
+    { value: "text-justify", text: "Justificado" },
+    { value: "text-start", text: "Inicio" },
+    { value: "text-end", text: "Final" },
+  ],
+  padding: [
+    { value: "p-0", text: "Por defecto" },
+    { value: "p-2", text: "Pequeño" },
+    { value: "p-4", text: "Mediano" },
+    { value: "p-6", text: "Grande" },
+  ],
+  margin: [
+    { value: "m-0", text: "Por defecto" },
+    { value: "m-2", text: "Pqueño" },
+    { value: "m-4", text: "Mediano" },
+    { value: "m-6", text: "Grande" },
+  ],
+};

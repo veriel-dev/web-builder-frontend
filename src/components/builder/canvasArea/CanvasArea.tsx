@@ -1,8 +1,10 @@
+
+import { motion, AnimatePresence } from "framer-motion"
 import { Settings, Trash2 } from "lucide-react"
 
 import { deviceWidths } from "../../../const"
+import { cn } from "../../../lib/utils"
 import { useWebBuilderStore } from "../../../store/store"
-import { ElementEditor } from "../../editor"
 import { RenderElement } from "../../RenderElement"
 import { GridContainer, Container } from "../../ui"
 
@@ -14,76 +16,101 @@ interface Props {
     isPreviewMode?: boolean
 }
 export const CanvasArea = ({ selectedDevice, isPreviewMode = false }: Props): JSX.Element => {
-
     const {
         elements,
         editingElement,
         removeElement,
         setEditingElement,
-        updateElement,
         handleDrop,
         handleDragOver,
         handleDragLeave,
-        isDraggingOver
+        editingElementId,
+        setEditingElementId
     } = useWebBuilderStore();
     const resolution = deviceWidths[selectedDevice]
 
+    const toggleIsEditing = (elementId: number) => {
+        console.log
+            ({ elementId })
+        setEditingElementId(editingElementId === elementId ? null : elementId)
+    }
+
+
     const renderElementWithWrapper = (element: ElementBuilder): JSX.Element => {
         const isContainer = element.type === "container" || element.type === "grid-container";
-        const isDraggingOverThis = isDraggingOver === element.id;
-
-        const wrapperClasses = `
-            relative group mb-6 p-6 bg-white rounded-xl shadow-sm
-            border-2 transition-all duration-200
-            ${isDraggingOverThis ? 'border-indigo-500 bg-indigo-50' : 'border-transparent hover:border-indigo-200'}
-            ${isContainer ? 'min-h-[100px]' : ''}
-        `;
-
+        const isEditing = editingElementId === element.id
         return (
             <div
                 key={element.id}
-                className={wrapperClasses}
+                className={cn(
+                    "relative group",
+                    isContainer ? "h-full w-full" : "w-auto"
+                )}
                 role="contentinfo"
                 onDragLeave={handleDragLeave}
                 onDragOver={(e) => handleDragOver(e, element.id || null)}
                 onDrop={(e) => handleDrop(e, element.id || null)}
+
             >
                 {!isPreviewMode && (
-                    <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 flex gap-2 transition-opacity duration-200">
-                        <button
-                            className="p-2 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors duration-200"
-                            onClick={() => setEditingElement(editingElement?.id === element.id
-                                ? null : element)}
-                        >
-                            <Settings className="w-4 h-4 text-gray-600" />
-                        </button>
-                        <button
-                            className="p-2 bg-red-100 rounded-lg hover:bg-red-200 transition-colors duration-200"
-                            onClick={() => removeElement(element.id as number)}
-                        >
-                            <Trash2 className="w-4 h-4 text-red-600" />
-                        </button>
-                    </div>
+                    <AnimatePresence>
+                        {
+                            isEditing && (
+                                <motion.div
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    className="canvas-area"
+                                    exit={{ opacity: 0, scale: 0.95 }}
+                                    initial={{ opacity: 0, scale: 0.95 }}
+                                    transition={{ duration: 0.2 }}
+                                >
+                                    <div className="absolute -left-1 -top-2 h-4 w-4 rounded-full bg-yellow-500" />
+                                    <div className="absolute -right-1 -top-2 h-4 w-4 rounded-full bg-yellow-500" />
+                                    <div className="absolute -left-1 -bottom-2 h-4 w-4 rounded-full bg-yellow-500" />
+                                    <div className="absolute -right-1 -bottom-2 h-4 w-4 rounded-full bg-yellow-500" />
+                                    <button
+                                        className="canvas-area__buttons-settings"
+                                        onClick={() =>
+                                            setEditingElement(editingElement?.id === element.id
+                                                ? null : element)}
+                                    >
+                                        <Settings className="w-4 h-4 text-gray-600 dark:text-slate-100" />
+                                    </button>
+                                    <button
+                                        className="canvas-area__buttons-trash"
+                                        onClick={() => {
+                                            removeElement(element.id as number),
+                                                setEditingElement(null)
+                                        }}
+                                    >
+                                        <Trash2 className="canvas-area__buttons-trash-icon" />
+                                    </button>
+                                </motion.div>
+                            )
+                        }
+                    </AnimatePresence>
                 )}
 
                 {element.type === "container" && (
-                    <Container element={element}>
+                    <Container
+                        element={element}
+                        toggleIsEditing={() => toggleIsEditing(element.id as number)}
+                    >
                         {element.children?.map(child => renderElementWithWrapper(child))}
                     </Container>
                 )}
                 {element.type === "grid-container" && (
-                    <GridContainer element={element}>
+                    <GridContainer
+                        element={element}
+                        toggleIsEditing={() => toggleIsEditing(element.id as number)}
+                    >
                         {element.children?.map(child => renderElementWithWrapper(child))}
                     </GridContainer>
                 )}
                 {element.type !== "container" && element.type !== "grid-container" && (
-                    <RenderElement element={element} />
-                )}
-
-                {editingElement?.id === element.id && (
-                    <ElementEditor
+                    <RenderElement
                         element={element}
-                        updateElement={updateElement}
+
+                        toggleIsEditing={() => toggleIsEditing(element.id as number)}
                     />
                 )}
             </div>
@@ -91,7 +118,7 @@ export const CanvasArea = ({ selectedDevice, isPreviewMode = false }: Props): JS
     };
     return (
         <div
-            className={`flex-1 p-8 overflow-auto bg-slate-100 ${resolution}`}
+            className={`flex-1 p-8 overflow-auto bg-slate-100 dark:bg-slate-800 ${resolution}`}
             role="contentinfo"
             onDragLeave={handleDragLeave}
             onDragOver={(e) => handleDragOver(e)}
@@ -100,7 +127,7 @@ export const CanvasArea = ({ selectedDevice, isPreviewMode = false }: Props): JS
             {elements.length > 0 ? (
                 elements.map(element => renderElementWithWrapper(element))
             ) : (
-                <div className="text-center py-16 px-6 bg-white rounded-xl border-2 border-dashed border-gray-300 h-full flex justify-center items-center">
+                <div className="text-center py-16 px-6 bg-white dark:bg-slate-900 rounded-xl border-2 border-dashed border-gray-300 h-full flex justify-center items-center">
                     <p className="text-gray-500 text-lg">
                         Arrastra elementos aquí para construir tu página
                     </p>

@@ -1,6 +1,7 @@
 
 
-import { Container, GridContainer } from "./elements";
+import { Button, Container, GridContainer } from "./elements";
+import { Heading } from "./elements/Heading";
 import { Hero } from "./elements/Hero";
 import { Text } from "./elements/Text";
 
@@ -12,24 +13,27 @@ interface Props {
 }
 export const ElementEditor = (
     { element, updateElement }: Props): JSX.Element => {
-
-    const widthElement = element.type === "container" ? "w-[550px]" : "w-72"
     return (
-        <div className={`absolute top-full left-0 mt-2 p-4 bg-white rounded-lg shadow-xl border border-gray-200 z-10 ${widthElement}`}>
+        <div className="container-element-editor">
             <div className="space-y-4">
+                {
+                    element.type === "button" && (
+                        <Button
+                            element={element}
+                        />
+                    )
+                }
                 {
                     element.type === "paragraph" && (
                         <Text
                             element={element}
-                            updateElement={updateElement}
                         />
                     )
                 }
                 {
                     element.type === "heading" && (
-                        <Text
+                        <Heading
                             element={element}
-                            updateElement={updateElement}
                         />
                     )
                 }

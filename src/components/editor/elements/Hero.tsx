@@ -14,6 +14,7 @@ export const Hero = ({ element, updateElement }: Props): JSX.Element => {
         <>
             <Text
                 element={element}
+                //@ts-ignore
                 updateElement={updateElement}
             />
 

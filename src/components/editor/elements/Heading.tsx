@@ -1,7 +1,7 @@
-import { ChevronDown, Move, Type } from "lucide-react";
+import { ChevronDown, Heading1, Move, Type } from "lucide-react";
 
 import { colorTextOptions } from "../../../const/colors";
-import { selectores } from "../../../const/text";
+import { selectores } from "../../../const/heading";
 import { textEditor } from "../../../const/text-editor";
 
 import { ColorPicker } from "./colorPicker";
@@ -18,15 +18,16 @@ type ElementWithText = Extract<ElementBuilder, { text: string }>;
 interface Props {
     element: ElementWithText;
 }
-export const Text = ({ element }: Props) => {
+export const Heading = ({ element }: Props) => {
     return (
         <>
             <Tabs />
             {/* Content */}
             <div className="container-content-editor">
-                <div className="container-content-editor-element">
+                <div className='container-content-editor-element'>
                     {/* Text */}
                     <InputText element={element} keyValue="text" label="Texto" />
+
                     {/* Font Size */}
                     <Selector
                         element={element}
@@ -45,7 +46,6 @@ export const Text = ({ element }: Props) => {
                         label={textEditor.fontWeight}
                         options={selectores.fontWeight}
                     />
-
                     {/* Padding */}
                     <Selector
                         element={element}
@@ -64,8 +64,7 @@ export const Text = ({ element }: Props) => {
                         label={textEditor.margin}
                         options={selectores.margin}
                     />
-                </div>
-                <div className="container-content-editor-element">
+
                     {/* Text position */}
                     <Selector
                         element={element}
@@ -74,6 +73,17 @@ export const Text = ({ element }: Props) => {
                         keyValue="textPosition"
                         label={textEditor.textPosition}
                         options={selectores.textPosition}
+                    />
+                </div>
+                <div className='container-content-editor-element'>
+                    {/* Heading */}
+                    <Selector
+                        element={element}
+                        icon={ChevronDown}
+                        iconType={Heading1}
+                        keyValue="level"
+                        label={textEditor.heading}
+                        options={selectores.level}
                     />
                     {/* Color Picker - Color */}
                     <ColorPicker

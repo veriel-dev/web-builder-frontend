@@ -7,10 +7,11 @@ export const Paragraph = ({
     text,
     fontSize,
     color,
-    backgroundColor
-}: ParagraphProps): JSX.Element => {
+    backgroundColor,
+    fontWeight
+}: ParagraphProps) => {
     return (
-        <p className={cn(`${fontSize} ${color} ${backgroundColor}`, 'leading-relaxed')}>
+        <p className={cn(fontSize, color, backgroundColor, fontWeight, 'leading-relaxed block w-auto')}>
             {text}
         </p>
     )

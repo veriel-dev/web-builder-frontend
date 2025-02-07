@@ -15,55 +15,55 @@ export const TopBar = ({
     setIsPreviewMode
 }: Props): JSX.Element => {
     return (
-        <div className="h-16 border-b bg-white px-4 flex items-center justify-between">
+        <div className="top-bar">
             <div className="flex items-center gap-4">
-                <button className="p-2 hover:bg-slate-100 rounded-lg">
-                    <Undo className="w-5 h-5" />
+                <button className="top-bar__button">
+                    <Undo className="top-bar__icon-style" />
                 </button>
-                <button className="p-2 hover:bg-slate-100 rounded-lg">
-                    <Redo className="w-5 h-5" />
+                <button className="top-bar__button">
+                    <Redo className="top-bar__icon-style" />
                 </button>
             </div>
 
-            <div className="flex items-center gap-2 bg-slate-100 p-1 rounded-lg">
+            <div className="top-bar__device-controls">
                 <button
-                    className={`p-2 rounded-md transition-colors ${selectedDevice === 'desktop' ? 'bg-white shadow-sm' : 'hover:bg-slate-200'}`}
+                    className={`top-bar__device-button ${selectedDevice === 'desktop' ? 'bg-white dark:bg-slate-900 shadow-sm' : 'hover:bg-slate-200 dark:hover:bg-slate-900'}`}
                     onClick={() => setSelectedDevice('desktop')}
                 >
-                    <Monitor className="w-5 h-5" />
+                    <Monitor className="top-bar__icon-style" />
                 </button>
                 <button
-                    className={`p-2 rounded-md transition-colors ${selectedDevice === 'tablet' ? 'bg-white shadow-sm' : 'hover:bg-slate-200'}`}
+                    className={`top-bar__device-button ${selectedDevice === 'tablet' ? 'bg-white dark:bg-slate-900 shadow-sm' : 'hover:bg-slate-200 dark:hover:bg-slate-900'}`}
                     onClick={() => setSelectedDevice('tablet')}
                 >
-                    <Tablet className="w-5 h-5" />
+                    <Tablet className="top-bar__icon-style" />
                 </button>
                 <button
-                    className={`p-2 rounded-md transition-colors ${selectedDevice === 'mobile' ? 'bg-white shadow-sm' : 'hover:bg-slate-200'}`}
+                    className={`top-bar__device-button ${selectedDevice === 'mobile' ? 'bg-white dark:bg-slate-900 shadow-sm' : 'hover:bg-slate-200 dark:hover:bg-slate-900'}`}
                     onClick={() => setSelectedDevice('mobile')}
                 >
-                    <Smartphone className="w-5 h-5" />
+                    <Smartphone className="top-bar__icon-style" />
                 </button>
             </div>
 
             <div className="flex items-center gap-2">
-                <button className="p-2 hover:bg-slate-100 rounded-lg">
-                    <Code className="w-5 h-5" />
+                <button className="top-bar__button">
+                    <Code className="top-bar__icon-style" />
                 </button>
                 <button
-                    className="p-2 hover:bg-slate-100 rounded-lg"
+                    className="top-bar__button"
                     onClick={() => setIsPreviewMode(true)}
                 >
-                    <Eye className="w-5 h-5" />
+                    <Eye className="top-bar__icon-style" />
                 </button>
-                <button className="p-2 hover:bg-slate-100 rounded-lg">
-                    <Share2 className="w-5 h-5" />
+                <button className="top-bar__button">
+                    <Share2 className="top-bar__icon-style" />
                 </button>
-                <button className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors flex items-center gap-2">
-                    <Save className="w-4 h-4" />
+                <button className="top-bar__save-button">
+                    <Save className="top-bar__save-icon" />
                     Save
                 </button>
             </div>
-        </div>
+        </div >
     )
 }

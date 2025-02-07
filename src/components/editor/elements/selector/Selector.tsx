@@ -30,13 +30,13 @@ export const Selector = ({
 
   return (
     <div className="space-y-2">
-      <label className="flex items-center gap-2 text-sm font-medium text-gray-700">
+      <label className="container-element-editor__selector-type">
         <IconType className="h-4 w-4" />
         {label}
       </label>
       <div className="relative">
         <select
-          className="w-full py-2 px-3 bg-gray-50 border border-gray-200 rounded-md text-sm text-gray-700 appearance-none focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          className="container-element-editor__selector-select"
           value={element[keyValue] as string}
           onChange={(e) => updateElement(
             element.id as number, { [keyValue]: e.target.value })}
@@ -47,7 +47,7 @@ export const Selector = ({
             ))
           }
         </select>
-        <Icon className="w-4 h-4 absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
+        <Icon className="container-element-editor__selector-icon" />
       </div>
     </div>
   )

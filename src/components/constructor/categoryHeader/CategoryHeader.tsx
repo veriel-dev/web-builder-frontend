@@ -9,20 +9,19 @@ interface Props {
 export const CategoryHeader = ({ title, isOpen, onToggle }: Props): JSX.Element => {
     return (
         <button
-            className="w-full flex items-center justify-between p-2 hover:bg-gray-100 rounded-lg group transition-colors duration-200"
+            className="category-header group"
             onClick={onToggle}
         >
-            <span className='text-xs font-medium uppercase text-gray-500 tracking-wider'>
+            <span className='category-header_title'>
                 {title}
             </span>
             <motion.div
                 animate={{ rotate: isOpen ? 180 : 0 }}
-                className='text-gray-500'
+                className='text-gray-500 dark:text-slate-100'
                 transition={{ duration: 0.3, ease: "easeInOut" }}
             >
-                <ChevronDown className='h-4 w-4 transition-colors group-hover:text-gray-700' />
+                <ChevronDown className='category-header_chevron-down group-hover:text-gray-700 dark:group-hover:text-slate-200' />
             </motion.div>
-
         </button>
     )
 }

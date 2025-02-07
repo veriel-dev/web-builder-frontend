@@ -1,9 +1,6 @@
-import { CanvasArea, ElementConstructor, MainLayout, TopBar } from "../components"
+import { CanvasArea, ContainerEditor, ElementConstructor, MainLayout, TopBar } from "../components"
 import { PreviewMode } from "../components/builder/previewMode/PreviewMode";
 import { useWebBuilderStore } from "../store/store"
-
-
-
 
 export const WebBuilder = () => {
   const {
@@ -12,8 +9,6 @@ export const WebBuilder = () => {
     setSelectedDevice,
     isPreviewMode,
     setIsPreviewMode,
-
-    // New drag and drop functionality
     handleDragStart,
     handleDrop,
     handleDragOver,
@@ -39,7 +34,7 @@ export const WebBuilder = () => {
       />
       {/* Main Content */}
       <div
-        className="flex-1 flex flex-col"
+        className="main-content"
         role="contentinfo"
         onDragLeave={handleDragLeave}
         onDragOver={(e) => handleDragOver(e)}
@@ -57,6 +52,8 @@ export const WebBuilder = () => {
           selectedDevice={selectedDevice}
         />
       </div>
+      {/* Right SideBar */}
+      <ContainerEditor />
     </MainLayout>
 
   )

@@ -1,19 +1,21 @@
-import { Type } from 'lucide-react'
+import { Settings2 } from 'lucide-react'
 
-export const Tabs = () => {
+interface Props {
+  title?: string;
+}
+export const Tabs = ({ title = 'Estilo del elemento' }: Props) => {
   return (
-    <div className="border-b border-gray-100">
-      <nav className="flex w-auto">
+    <div className="container-tabs">
+      <div className="flex w-auto">
         <button
-          className="flex-1 px-4 py-3 text-sm font-medium transition-colors text-gray-900 border-b-2 border-indigo-500"
+          className="container-tabs__buttons"
         >
           <div className="flex items-center justify-start gap-2">
-            <Type className="w-4 h-4" />
-            <span className='text-start'>Estilos</span>
+            <Settings2 className="w-4 h-4" />
+            <span className='text-start'>{title}</span>
           </div>
         </button>
-
-      </nav>
+      </div>
     </div>
   )
 }

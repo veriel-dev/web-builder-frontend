@@ -28,18 +28,18 @@ export const ElementCard = ({
             onDragStart={() => handleDragStart(element as ElementBuilder)}
         >
             <button
-                className="w-full p-3 h-auto bg-white border border-gray-200 rounded-lg hover:bg-gray-50 hover:shadow-md transition-all duration-300 ease-in-out group"
+                className="element-card group"
             >
                 <div className="flex items-start gap-3 w-full">
-                    <div className="text-gray-600 pt-1">
+                    <div className="element-card__icon">
                         {icon}
                     </div>
                     <div className="flex-1 space-y-2">
-                        <span className="text-sm font-medium text-gray-600 block text-left">
+                        <span className="element-card__label">
                             {label}
                         </span>
                         <motion.div
-                            className="w-full min-h-[40px] flex items-center justify-center p-2 bg-white rounded border border-gray-100 group-hover:border-gray-200 transition-all duration-300"
+                            className="element-card__preview group-hover:border-gray-200 dark:group-hover:border-slate-800"
                             transition={{ duration: 0.2 }}
                             whileHover={{ scale: 1.02 }}
                         >

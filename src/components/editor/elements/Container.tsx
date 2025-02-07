@@ -2,6 +2,7 @@ import { Type, MoveHorizontal, AlignLeft, Columns, ChevronDown, ArrowLeftRight, 
 
 import { bgOptions, colorTextOptions } from '../../../const/colors';
 import { selectores } from '../../../const/container';
+import { textEditor } from '../../../const/text-editor';
 
 import { ColorPicker } from './colorPicker';
 import { Selector } from './selector/Selector';
@@ -19,8 +20,8 @@ export const Container = ({ element }: Props): JSX.Element => {
             {/* Tabs */}
             <Tabs />
             {/* Content */}
-            <div className=" flex gap-6">
-                <div className='flex-1 space-y-4'>
+            <div className="container-content-editor">
+                <div className='container-content-editor-element'>
                     {/* Direction */}
                     <SelectorFlex
                         cols="grid-cols-2"
@@ -28,7 +29,7 @@ export const Container = ({ element }: Props): JSX.Element => {
                         iconType={MoveHorizontal}
                         keyValue='direction'
                         selector={selectores.direction}
-                        title="Dirección"
+                        title={textEditor.direction}
                     />
                     {/* Align */}
                     <SelectorFlex
@@ -37,7 +38,7 @@ export const Container = ({ element }: Props): JSX.Element => {
                         iconType={AlignLeft}
                         keyValue="align"
                         selector={selectores.align}
-                        title="Alineación"
+                        title={textEditor.align}
                     />
                     {/* Justify */}
                     <SelectorFlex
@@ -46,14 +47,14 @@ export const Container = ({ element }: Props): JSX.Element => {
                         iconType={Columns}
                         keyValue="justify"
                         selector={selectores.justify}
-                        title="Justificación"
+                        title={textEditor.justify}
                     />
                     <Selector
                         element={element}
                         icon={ChevronDown}
                         iconType={Move}
                         keyValue="padding"
-                        label='Padding'
+                        label={textEditor.padding}
                         options={selectores.padding}
                     />
                     {/* Gap */}
@@ -62,7 +63,7 @@ export const Container = ({ element }: Props): JSX.Element => {
                         icon={ChevronDown}
                         iconType={ArrowLeftRight}
                         keyValue="gap"
-                        label='Espacio entre elementos'
+                        label={textEditor.gap}
                         options={selectores.gap}
                     />
                     <Selector
@@ -70,24 +71,24 @@ export const Container = ({ element }: Props): JSX.Element => {
                         icon={ChevronDown}
                         iconType={Type}
                         keyValue="fontSize"
-                        label="Tamaño de Letra"
+                        label={textEditor.fontSize}
                         options={selectores.fontSize}
                     />
                 </div>
-                <div className='flex-1 space-y-4' >
+                <div className='container-content-editor-element' >
                     {/* Color Picker - Background Color */}
                     <ColorPicker
                         colorOptions={bgOptions}
                         element={element}
                         keyValue="backgroundColor"
-                        label="Color de fondo"
+                        label={textEditor.backgroundColor}
                     />
                     {/* Color Picker - Color */}
                     <ColorPicker
                         colorOptions={colorTextOptions}
                         element={element}
                         keyValue="color"
-                        label="Color de texto"
+                        label={textEditor.color}
                     />
                 </div>
             </div>

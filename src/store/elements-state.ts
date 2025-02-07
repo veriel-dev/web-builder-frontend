@@ -22,6 +22,7 @@ export const createElementsSlice = (setState: SetState) => ({
             const updateElementsRecursively = (elements: ElementBuilder[]): ElementBuilder[] => {
                 return elements.map((element: ElementBuilder): ElementBuilder => {
                     if (element.id === id) {
+                        //@ts-ignore
                         return { ...element, ...updates };
                     }
                     if (
@@ -33,7 +34,7 @@ export const createElementsSlice = (setState: SetState) => ({
                             children: updateElementsRecursively(element.children)
                         } as ElementBuilder;
                     }
-    
+
                     return element;
                 });
             };
@@ -50,9 +51,9 @@ export const createElementsSlice = (setState: SetState) => ({
                         Array.isArray(element.children)
                     ) {
                         const filteredChildren = filterElementsRecursively(element.children);
-                        
-                        if (element.id === id) {return false;}
-                        
+
+                        if (element.id === id) { return false; }
+
                         return {
                             ...element,
                             children: filteredChildren
@@ -61,11 +62,11 @@ export const createElementsSlice = (setState: SetState) => ({
                     if (element.id === id) {
                         return false;
                     }
-                    
+
                     return element;
                 }).filter((element): element is ElementBuilder => element !== false);
             };
-    
+
             const newElements = filterElementsRecursively(state.elements);
             return { elements: newElements };
         });
